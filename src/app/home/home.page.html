@@ -1,14 +1,61 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Social Media App
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+
+  <ion-card *ngFor="let post of displayPosts">
+
+    <ion-item color="primary">
+      <ion-label text-wrap>
+        <ion-text>
+          <h2 class="ion-text-center">Title</h2>
+          <h2 class="ion-text-center">{{post.title}}</h2>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item color="secondary">
+      <ion-label text-wrap>
+        <ion-text>
+          <h2 class="ion-text-center">Content</h2>
+          <p class="ion-text-center">{{post.body}}</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item color="secondary">
+      <ng-container *ngFor="let user of users">
+        <ng-container *ngIf="post.userId === user.id">
+          <ion-label>
+            <ion-text>
+              <h3>Contributor: <span>{{user.name}}</span></h3>
+              <h3>Company: <span>{{user.company.name}}</span></h3>
+            </ion-text>
+          </ion-label>
+        </ng-container>
+      </ng-container>
+    </ion-item>
+
+    <ion-item color="dark">
+      <ng-container *ngFor="let comment of comments; index as key">
+        <ng-container *ngIf="comment.postId === post.id">
+          <p [hidden]="true">{{countComment()}}</p>
+        </ng-container>
+      </ng-container>
+      No of Comments: {{displayCount()}}
+    </ion-item>
+
+  </ion-card>
+
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more posts data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>
