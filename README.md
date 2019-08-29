@@ -25,20 +25,20 @@ Shown below is a giphy of a working application in local development setup
 
 The following must be installed to run the app locally
 
-*[Node.js](https://nodejs.org/en/)
-*[npm](https://www.npmjs.com)
-*[Ionic and Cordova] (https://ionicframework.com/docs/angular/your-first-app)
+* [Node.js](https://nodejs.org/en/)
+* [npm](https://www.npmjs.com)
+* [Ionic and Cordova](https://ionicframework.com/docs/angular/your-first-app)
 
-Next, clone the repository and perform 
+Next, clone the repository and perform the following commands at the root of the directory
 
-npm install, followed by
-ionic serve
+* npm install, followed by 
+* ionic serve
 
-The app will start serving in localhost port 8100.
-Redirect to the following url in the browser localhost:8100/home 
+The app will start serving in localhost port 8100. Redirect to the following url in the browser (localhost:8100/home) 
 
 Note that the app was developed using 
-Node.js v12.7.0 
-npm 6.10.0
-ionic 5.2.6
-Angular v8 
+
+* Node.js v12.7.0 
+* npm 6.10.0
+* ionic 5.2.6
+* Angular v8 
