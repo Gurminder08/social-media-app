@@ -1,61 +1,59 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Social Media App
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar>
+      <ion-title>
+        Social Media App
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+  
+    <ion-card *ngFor="let post of displayPosts">
+  
+      <ion-card-header color='primary'>
+          <ion-card-title>{{ post.title }}</ion-card-title>
+      </ion-card-header>
+  
+      <ion-card-content>{{ post.body }}</ion-card-content>
+  
+      <ion-item>
+        <ng-container *ngFor="let user of users">
+          <ng-container *ngIf="post.userId === user.id">
+                <div>
+                    <ion-chip color="primary">
+                        <ion-icon name="contact"></ion-icon>
+                        <ion-label>{{user.name}}</ion-label>
+                    </ion-chip>
 
-<ion-content>
-
-  <ion-card *ngFor="let post of displayPosts">
-
-    <ion-item color="primary">
-      <ion-label text-wrap>
-        <ion-text>
-          <h2 class="ion-text-center">Title</h2>
-          <h2 class="ion-text-center">{{post.title}}</h2>
-        </ion-text>
-      </ion-label>
-    </ion-item>
-
-    <ion-item color="secondary">
-      <ion-label text-wrap>
-        <ion-text>
-          <h2 class="ion-text-center">Content</h2>
-          <p class="ion-text-center">{{post.body}}</p>
-        </ion-text>
-      </ion-label>
-    </ion-item>
-
-    <ion-item color="secondary">
-      <ng-container *ngFor="let user of users">
-        <ng-container *ngIf="post.userId === user.id">
-          <ion-label>
-            <ion-text>
-              <h3>Contributor: <span>{{user.name}}</span></h3>
-              <h3>Company: <span>{{user.company.name}}</span></h3>
-            </ion-text>
-          </ion-label>
+                    <ion-chip color="primary" class="ion-text-center">
+                        <ion-icon name="briefcase"></ion-icon>
+                        <ion-label>{{ user.company.name }}</ion-label>
+                    </ion-chip>
+                </div>
+          </ng-container>
         </ng-container>
-      </ng-container>
-    </ion-item>
-
-    <ion-item color="dark">
-      <ng-container *ngFor="let comment of comments; index as key">
-        <ng-container *ngIf="comment.postId === post.id">
-          <p [hidden]="true">{{countComment()}}</p>
+  
+        <ng-container *ngFor="let comment of comments; index as key">
+          <ng-container *ngIf="comment.postId === post.id">
+            <p [hidden]="true">{{countComment()}}</p>
+          </ng-container>
         </ng-container>
-      </ng-container>
-      No of Comments: {{displayCount()}}
-    </ion-item>
 
-  </ion-card>
-
-
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more posts data...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-
-</ion-content>
+        <div>
+            <ion-chip color="primary">
+                <ion-icon name="text"></ion-icon>
+                <ion-label>{{displayCount()}}</ion-label>
+            </ion-chip>
+        </div>
+        
+      </ion-item>
+  
+    </ion-card>
+  
+  
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more posts data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  
+  </ion-content>
