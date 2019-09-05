@@ -1,3 +1,34 @@
-<p>
-  post works!
-</p>
+<div *ngIf="!post || !user || !user.company" class="ion-padding custom-skeleton">
+  <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+  <ion-skeleton-text animated></ion-skeleton-text>
+  <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+  <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+  <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+</div>
+<ion-card *ngIf="post && user && user.company">
+  <ion-card-header color='primary'>
+      <ion-card-title *ngIf="post">{{ post.title }}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content *ngIf="post">{{ post.body }}</ion-card-content>
+  
+  <ion-item>
+    <div>
+        <ion-chip color="primary">
+            <ion-icon name="contact"></ion-icon>
+            <ion-label *ngIf="user">{{ user.name }}</ion-label>
+        </ion-chip>
+
+        <ion-chip color="primary" class="ion-text-center">
+            <ion-icon name="briefcase"></ion-icon>
+            <ion-label *ngIf="user && user.company">{{ user.company.name }}</ion-label>
+        </ion-chip>
+    </div>
+    <div>
+        <ion-chip color="primary">
+            <ion-icon name="text"></ion-icon>
+            <ion-label>{{ numberOfComments || 0 }}</ion-label>
+        </ion-chip>
+    </div>   
+  </ion-item>
+</ion-card>

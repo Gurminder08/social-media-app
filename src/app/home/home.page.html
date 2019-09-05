@@ -8,48 +8,7 @@
   
   <ion-content>
   
-    <ion-card *ngFor="let post of displayPosts">
-  
-      <ion-card-header color='primary'>
-          <ion-card-title>{{ post.title }}</ion-card-title>
-      </ion-card-header>
-  
-      <ion-card-content>{{ post.body }}</ion-card-content>
-  
-      <ion-item>
-        <ng-container *ngFor="let user of users">
-          <ng-container *ngIf="post.userId === user.id">
-                <div>
-                    <ion-chip color="primary">
-                        <ion-icon name="contact"></ion-icon>
-                        <ion-label>{{user.name}}</ion-label>
-                    </ion-chip>
-
-                    <ion-chip color="primary" class="ion-text-center">
-                        <ion-icon name="briefcase"></ion-icon>
-                        <ion-label>{{ user.company.name }}</ion-label>
-                    </ion-chip>
-                </div>
-          </ng-container>
-        </ng-container>
-  
-        <ng-container *ngFor="let comment of comments; index as key">
-          <ng-container *ngIf="comment.postId === post.id">
-            <p [hidden]="true">{{countComment()}}</p>
-          </ng-container>
-        </ng-container>
-
-        <div>
-            <ion-chip color="primary">
-                <ion-icon name="text"></ion-icon>
-                <ion-label>{{displayCount()}}</ion-label>
-            </ion-chip>
-        </div>
-        
-      </ion-item>
-  
-    </ion-card>
-  
+    <app-post [post]='post' *ngFor="let post of displayPosts"></app-post>
   
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more posts data...">
