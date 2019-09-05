@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ControllerService } from '../services/controller.service';
+import { PostService } from '../services/post.service';
 import { Post } from '../models/post';
-import { User } from '../models/user';
-import { Comment } from '../models/comment'
-
 
 @Component({
   selector: 'app-home',
@@ -14,15 +11,12 @@ import { Comment } from '../models/comment'
 })
 export class HomePage {
 
-  numComments: number = 0;
   posts: Post[] = [];
-  users: User[] = [];
-  comments: Comment[] = [];
   len: number = 10;
   displayPosts: Post[] = [];
 
   // injecting modules to the constructor
-  constructor(public api: ControllerService,
+  constructor(public api: PostService,
     public loadingController: LoadingController,
     public router: Router,
     public route: ActivatedRoute) {
@@ -32,8 +26,6 @@ export class HomePage {
   // making api calls to fetch posts, users and comments
   ngOnInit() {
     this.getPosts();
-    this.getUsers();
-    this.getComments();
   }
 
   async getPosts() {
@@ -49,26 +41,6 @@ export class HomePage {
       }, err => {
         console.log(err);
         loading.dismiss();
-      });
-  }
-
-  async getUsers() {
-
-    await this.api.getUsers()
-      .subscribe(res => {
-        this.users = res;
-      }, err => {
-        console.log(err);
-      });
-  }
-
-  async getComments() {
-
-    await this.api.getComments()
-      .subscribe(res => {
-        this.comments = res;
-      }, err => {
-        console.log(err);
       });
   }
 
@@ -89,18 +61,6 @@ export class HomePage {
     this.displayPosts = this.posts.slice(0, len);
     console.log(this.displayPosts);
     this.len = this.len + 10;
-  }
-
-  // counting number of comments for each post
-  countComment() {
-    this.numComments++;
-  }
-
-  // method to display the count
-  displayCount() {
-    let currentCount = this.numComments;
-    this.numComments = 0;
-    return currentCount;
   }
 
 }
