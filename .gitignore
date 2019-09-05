@@ -22,6 +22,7 @@ coverage/
 www/
 dist/
 node_modules/
+out-tsc/
 tmp/
 temp/
 platforms/
